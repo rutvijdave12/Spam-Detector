@@ -1,1 +1,13 @@
+#readex 1.0
+
+Driver code is used to instantiate the login module containing mail class.
+
+
+Class mail contains different functions such as login,initiate and retrieve.
+
+
+The content extracted from the mail is cleaned using the clean module which uses the beautiful soup library.
+
+
+Lastly all the email ids mentioned in the content are printed using the idex module
 
