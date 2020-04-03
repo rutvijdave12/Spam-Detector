@@ -7,6 +7,9 @@ Class mail contains different functions such as login,initiate and retrieve.
 
 
 The content extracted from the mail is cleaned using the clean module which uses the beautiful soup library.
+    1.Make sure you've installed beautiful soup library
+    2.Copy paste this command inside your command prompt for windows users -------------------> pip install beautifulsoup4
+    3.If you have anaconda then you might have the library but it's better if you upgrade it by typing the above cammand.
 
 
 Lastly all the email ids mentioned in the content are printed using the idex module
