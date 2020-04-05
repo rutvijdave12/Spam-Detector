@@ -6,8 +6,9 @@ from email.policy import default
 #my_str = "Hi my name is John and email address is john.doe@somecompany.co.uk and my friend's email is jane_doe124@gmail.com"
 #emails = re.findall("([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)", my_str)
 
-#check function will try to extract all the email ids from the given input which is the already cleaned content
+#check function will try to extract all the email ids from the given input which is an already cleaned content
 def check(my_str):
+#Input my_str is the clean content passed into the check function to get the email ids.
     #print(my_str)
     emails = re.findall("([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)", my_str)
     for mail in emails:
