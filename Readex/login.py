@@ -2,12 +2,14 @@
 
 
 #'(UID BODY[1])'-----------------> used to get just the body of the email.
-#'(RFC822)'----------------------> gets you rhe whole email contents.
+#'(RFC822)'----------------------> gets you the whole email contents.
 #'(UID BODY[TEXT])'--------------> again gets you just the body of the email but with some changes(see for yourself).
 
 import imaplib
 import email
 import config
+from email.parser import BytesParser, Parser
+from email.policy import default
 
 class mail:
 
@@ -32,7 +34,35 @@ class mail:
         latest_email_id = int( self.id_list[0] )
 
 #retrieve uses a fetch method which will fetch you a particular email depending on the parameter passed in your driver script.
-    def retrieve (self,num):
+    def main_content (self,num):
         #data is a two dimensional array which whose (0,1)th element will have the data stored.
-        status,data = self.msvr.fetch(self.id_list[num],'(RFC822)' )
-        return data[0][1]
+        status,data = self.msvr.fetch(self.id_list[num], '(RFC822)')
+        script = data[0][1].decode("utf-8")
+        #print(script)
+        email_m = email.message_from_string(script)
+        sender = email_m['From'].split()[-1]
+        sub = email_m['Subject']
+        typ,dat = self.msvr.fetch(self.id_list[num],'(UID BODY[1])')
+        text = dat[0][1].decode("utf-8")
+        '''
+        print("rm")
+        print(rm)
+        print("done")
+       # mail1 = email.message_from_string(data[0][1])
+        print("printing mail")
+        #print(mail1)
+        print("printed")'''
+        return sender,str(sub),str(text)
+
+
+
+
+'''
+    typ, data = M.fetch(num, '(RFC822)')
+mail = email.message_from_string(data[0][1])
+headers = HeaderParser().parsestr(data[0][1]) 
+message = parse_message(mail)  #body
+org = headers['From']
+
+
+email.utils.parseaddr(address)'''
