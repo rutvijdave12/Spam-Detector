@@ -2,7 +2,6 @@
 import config
 from login import mail
 from clean import clean
-from idex import check,details
 from csv import reader
 import pandas as pd
 
