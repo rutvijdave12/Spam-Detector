@@ -15,6 +15,9 @@ The subject,Sender's email address and body are printed using the email library.
 
 
 
+*************Reading and extraction of mail and all of its relevant details is done.*************
 
-**********************IDEX.PY IS NO LONGER REQUIRED ITS FUNCTIONALITY JAS BEEN RETAINED INSIDE THE LOGIN AND DRIVER MODULES******************************
+*************Further upadates will only contain different outputs and datasets.*************
 
+
+*************IDEX.PY IS NO LONGER REQUIRED ITS FUNCTIONALITY JAS BEEN RETAINED INSIDE THE LOGIN AND DRIVER MODULES.*************
