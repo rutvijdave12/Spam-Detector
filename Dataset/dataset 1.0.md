@@ -1,4 +1,6 @@
-#dataset 1.0
+#dataset 1.0.
+
+
 This folder contains some python scripts which are present in readex(read and extract) and a new python module called reduce along with
 two csv files showing how the dataset looks before and after some specific cleaning of the text.
 
