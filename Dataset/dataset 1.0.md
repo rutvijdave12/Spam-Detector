@@ -5,6 +5,7 @@ This folder contains some python scripts which are present in readex(read and ex
 two csv files showing how the dataset looks before and after some specific cleaning of the text.
 
 Reduce.py:
+
 1.It removes punctuations,links and stopwords present in the text.
          
 2.It also removes some random combination of words and numbers (for eg. gjwj459q1vjr9eewf0wSDjjt93) which are irrelevant 
