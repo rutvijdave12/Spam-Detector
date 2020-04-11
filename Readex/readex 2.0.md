@@ -11,13 +11,16 @@ Class mail contains different functions such as login,initiate and retrieve.
 The content extracted from the mail is cleaned using the clean module which uses the beautiful soup library.
 
 
-    1.Make sure you've installed beautiful soup library
+    1.Make sure you've installed beautiful soup library and lxml.
     
     
     2.Copy paste this command inside your command prompt for windows users -------------------> pip install beautifulsoup4
     
     
-    3.If you have anaconda then you might have the library but it's better if you upgrade it by typing the above cammand.
+    3.Copy paste this command inside your command prompt for windows users -------------------> pip install lxml
+    
+    
+    4.If you have anaconda then you might have the library but it's better if you upgrade it by typing the above cammand.
     
 
 The subject,Sender's email address and body are printed using the email library.
