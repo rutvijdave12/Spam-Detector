@@ -37,13 +37,13 @@ class mail:
     def main_content (self,num):
         #data is a two dimensional array which whose (0,1)th element will have the data stored.
         status,data = self.msvr.fetch(self.id_list[num], '(RFC822)')
-        script = data[0][1].decode("utf-8")
+        script = data[0][1].decode("utf-8",errors = 'ignore')
         #print(script)
         email_m = email.message_from_string(script)
         sender = email_m['From'].split()[-1]
         sub = email_m['Subject']
         typ,dat = self.msvr.fetch(self.id_list[num],'(UID BODY[1])')
-        text = dat[0][1].decode("utf-8")
+        text = dat[0][1].decode(encoding = "utf-8",errors = 'ignore')
         '''
         print("rm")
         print(rm)
