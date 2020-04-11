@@ -17,15 +17,16 @@ words = set(nltk.corpus.words.words())
 def filter(content):
     content = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', content)
     no_punc = [char for char in content if char not in string.punctuation]
-    #print(nopunc)
+    #print(no_punc)
     no_punc = ''.join(no_punc)
-    #print(nopunc)
+    #print(no_punc)
 
-    filtered = [word for word in no_punc.split() if word.lower() in words or not word.isalpha()]
+    #filtered = [word for word in no_punc.split() if word.lower() in words or not word.isalpha()]
     #print(filtered)
-    filtered_list = list(set([word for word in filtered if word.lower() not in stop_words]))
+    filtered_list = list(set([word for word in no_punc.split() if word.lower() not in stop_words]))
     #print(filtered_list)
     filtered_list = [word for word in filtered_list if (word.isalpha() or word.isdigit())]
+    #print(filtered_list)
     
     return filtered_list
 
