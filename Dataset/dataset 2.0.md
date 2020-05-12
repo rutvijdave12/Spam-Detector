@@ -15,8 +15,8 @@ shouldn't be affecting the main motive of determining spam or ham however it wou
 
 Changes:
 1.utf-8 decoding in login.py has been modified and an extra argument errors='ignore' has been added to decoding of bytes.
-2.GUI for login added.Config.py not required anymore.
+2.GUI for login added."Config.py" not required anymore.
 
 
 
-**********The result will be a csv file named 'emails' containing Sender's address,Subject and Body.***********
+**********The result will be a csv file named 'my_emails' containing Sender's address,Subject and Body.***********
