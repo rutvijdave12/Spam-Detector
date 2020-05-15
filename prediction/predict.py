@@ -135,8 +135,8 @@ model.fit(X_train, y_train, validation_data=(X_test, y_test),
           callbacks=[tensorboard, model_checkpoint],
           verbose=1)
 
-filepath = "/home/rutvij/Documents/spam2/Spam-Detector/prediction/model"
-save_model(model, filepath, save_format='h5')
+# filepath = "/home/rutvij/Documents/spam2/Spam-Detector/prediction/model"
+# save_model(model, filepath, save_format='h5')
 
 
 
