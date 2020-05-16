@@ -1,3 +1,10 @@
-trial.py
-.~lock.my_emails.csv#
-data
+data/glove.6B.50d.txt
+data/glove.6B.100d.txt
+data/glove.6B.200d.txt
+data/glove.6B.300d.txt
+emails-R.csv
+test2.csv
+dataset 2.0.md
+my_emails.csv
+readme
+

@@ -28,6 +28,6 @@ def filter(content):
     filtered_list = [word for word in filtered_list if (word.isalpha() or word.isdigit())]
     #print(filtered_list)
     
-    return filtered_list
+    return ' '.join(filtered_list)
 
 

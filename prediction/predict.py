@@ -11,7 +11,11 @@ from sklearn.model_selection import train_test_split
 import time
 import pandas as pd
 import pickle
-from tensorflow.keras.models import save_model
+from keras.backend import manual_variable_initialization
+manual_variable_initialization(True)
+
+
+
 
 
 
@@ -28,16 +32,28 @@ label2int = {"ham": 0, "spam": 1}
 int2label = {0: "ham", 1: "spam"}
 
 
+# def load_data():
+#     df = pd.read_csv('emails.csv')
+
+#     text,label = [],[]
+
+#     for ind in df.index:
+#         text.append(df['text'][ind])
+#         label.append(df['spam'][ind])
+
+#     return text,label
+
 def load_data():
-    df = pd.read_csv('emails.csv')
-
-    text,label = [],[]
-
-    for ind in df.index:
-        text.append(df['text'][ind])
-        label.append(df['spam'][ind])
-
-    return text,label
+    """
+    Loads SMS Spam Collection dataset
+    """
+    texts, labels = [], []
+    with open("data/SMSSpamCollection") as f:
+        for line in f:
+            split = line.split()
+            labels.append(split[0].strip())
+            texts.append(' '.join(split[1:]).strip())
+    return texts, labels
 
     # print(label)
     # print(text)
@@ -61,6 +77,7 @@ y = np.array(y)
 
 X = pad_sequences(X, maxlen=SEQUENCE_LENGTH)
 # print(y)
+y = [ label2int[label] for label in y ]
 y = to_categorical(y)
 
 # print(y)
@@ -120,7 +137,7 @@ model = get_model(tokenizer=tokenizer, lstm_units=128)
 # initialize our ModelCheckpoint and TensorBoard callbacks
 # model checkpoint for saving best weights
 model_checkpoint = ModelCheckpoint(f"results/spam_classifier",monitor='val_loss', save_best_only=True,
-                                    verbose=1,save_weights_only=True)
+                                    verbose=1,save_weights_only=False)
 print(1)
 # for better visualization
 tensorboard = TensorBoard(f"logs/spam_classifier_{time.time()}")
@@ -133,10 +150,9 @@ print("y_test.shape:", y_test.shape)
 model.fit(X_train, y_train, validation_data=(X_test, y_test),
           batch_size=BATCH_SIZE, epochs=EPOCHS,
           callbacks=[tensorboard, model_checkpoint],
-          verbose=1)
+          verbose=1,)
 
-# filepath = "/home/rutvij/Documents/spam2/Spam-Detector/prediction/model"
-# save_model(model, filepath, save_format='h5')
+
 
 
 
@@ -153,6 +169,8 @@ print(f"[+] Precision:   {precision*100:.2f}%")
 print(f"[+] Recall:   {recall*100:.2f}%")
 
 
+model.save("Spam-model-compiled.h5")
+
 
 def get_predictions(text):
     sequence = tokenizer.texts_to_sequences([text])
@@ -165,7 +183,7 @@ def get_predictions(text):
 
 
 
-
-# text = "Congratulations! you have won 100,000$ this week, click here to claim fast"
-text = "Buy Health Insurance with Cashless Claim Benefit & Tax saving u/s 80D"
-print(get_predictions(text))
+if __name__ == "__main__":
+    # text = "Congratulations! you have won 100,000$ this week, click here to claim fast"
+    text = "Buy Health Insurance with Cashless Claim Benefit & Tax saving u/s 80D"
+    print(get_predictions(text))

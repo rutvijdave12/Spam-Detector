@@ -9,6 +9,7 @@ from login_gui import Ui_MainWindow
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 import numpy as np
+import test
 
 # login_gui.gui()
 app = QtWidgets.QApplication(sys.argv)
@@ -41,8 +42,8 @@ try:
         #print(clean_body)
         clean_body = filter(clean_body)
         sender_lst.append(sender)
-        subject_lst.append(str(subject)[1:-1])
-        body_lst.append(str(clean_body)[1:-1])
+        subject_lst.append(subject)
+        body_lst.append(clean_body)
 
         # print(f"Sender's email address:{sender}")
         # print(f"Subject: {subject}")
@@ -51,17 +52,17 @@ try:
         print(count)
     #print(clean_body)
     print("done")
-    # Spam = [0]*len(subject_lst)
-    # print(Spam)
-
+    Spam = '0'*len(subject_lst)
 
     df = pd.DataFrame(list(zip(sender_lst,subject_lst,body_lst,Spam)),columns = ['Sender','Subject','Body','Spam'])
+    df.dropna(inplace=True)
     #print(df)
-    df.to_csv('my_emails.csv')
-    #import trial
+    df.to_csv('my_emails_unfiltered.csv')
+    test.send_text()
+
 
 except IndexError:
     print("Insufficient Data")
 
 except Exception:
-    print("Login Error")
+    print("Error")
