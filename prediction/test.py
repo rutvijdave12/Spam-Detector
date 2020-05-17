@@ -16,17 +16,13 @@ model.load_weights("results/spam_classifier_0.08")
 
 def get_predictions(text):
     sequence = tokenizer.texts_to_sequences([text])
-    # pad the sequence
     sequence = pad_sequences(sequence, maxlen=SEQUENCE_LENGTH)
-    # get the prediction
     prediction = model.predict(sequence)[0]
-    # one-hot encoded vector, revert using np.argmax
     return int2label[np.argmax(prediction)]
 
 if __name__ == "__main__":
     while True:
         text = input("Enter the mail:")
-        # convert to sequences
         print(get_predictions(text))
 else:
     def send_text():
