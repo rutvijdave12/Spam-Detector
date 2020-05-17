@@ -12,3 +12,6 @@ This project consists of:
 
 5.Using the generated model to predict the testing dataset.
 
+
+***Open predictions folder and run driver.py file***
+
