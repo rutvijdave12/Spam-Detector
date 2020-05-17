@@ -1,6 +1,6 @@
 import tqdm
 import numpy as np
-import keras_metrics # for recall and precision metrics
+import keras_metrics 
 from keras.preprocessing.sequence import pad_sequences
 from keras.preprocessing.text import Tokenizer
 from keras.layers import Embedding, LSTM, Dropout, Dense
@@ -19,15 +19,15 @@ manual_variable_initialization(True)
 
 
 
-SEQUENCE_LENGTH = 100 # the length of all sequences (number of words per sample)
-EMBEDDING_SIZE = 100  # Using 100-Dimensional GloVe embedding vectors
-TEST_SIZE = 0.25 # ratio of testing set
+SEQUENCE_LENGTH = 100 
+EMBEDDING_SIZE = 100  
+TEST_SIZE = 0.25
 
 
 BATCH_SIZE = 100
-EPOCHS = 60# number of epochs
+EPOCHS = 60
 
-# to convert labels to integers and vice-versa
+
 label2int = {"ham": 0, "spam": 1}
 int2label = {0: "ham", 1: "spam"}
 
@@ -44,9 +44,7 @@ int2label = {0: "ham", 1: "spam"}
 #     return text,label
 
 def load_data():
-    """
-    Loads SMS Spam Collection dataset
-    """
+
     texts, labels = [], []
     with open("data/SMSSpamCollection") as f:
         for line in f:
@@ -98,7 +96,6 @@ def get_embedding_vectors(tokenizer, dim=100):
     for word, i in word_index.items():
         embedding_vector = embedding_index.get(word)
         if embedding_vector is not None:
-            # words not found will be 0s
             embedding_matrix[i] = embedding_vector
             
     return embedding_matrix   
@@ -106,11 +103,7 @@ def get_embedding_vectors(tokenizer, dim=100):
 
 
 def get_model(tokenizer, lstm_units):
-    """
-    Constructs the model,
-    Embedding vectors => LSTM => 2 output Fully-Connected neurons with softmax activation
-    """
-    # get the GloVe embedding vectors
+
     embedding_matrix = get_embedding_vectors(tokenizer)
     model = Sequential()
     model.add(Embedding(len(tokenizer.word_index)+1,
@@ -122,8 +115,7 @@ def get_model(tokenizer, lstm_units):
     model.add(LSTM(lstm_units, recurrent_dropout=0.2))
     model.add(Dropout(0.3))
     model.add(Dense(2, activation="softmax"))
-    # compile as rmsprop optimizer
-    # aswell as with recall metric
+
     model.compile(optimizer="rmsprop", loss="categorical_crossentropy",
                   metrics=["accuracy", keras_metrics.precision(), keras_metrics.recall()])
     model.summary()
@@ -132,14 +124,9 @@ def get_model(tokenizer, lstm_units):
 
 model = get_model(tokenizer=tokenizer, lstm_units=128)
 
-
-
-# initialize our ModelCheckpoint and TensorBoard callbacks
-# model checkpoint for saving best weights
 model_checkpoint = ModelCheckpoint(f"results/spam_classifier",monitor='val_loss', save_best_only=True,
                                     verbose=1,save_weights_only=False)
 print(1)
-# for better visualization
 tensorboard = TensorBoard(f"logs/spam_classifier_{time.time()}")
 # print our data shapes
 print("X_train.shape:", X_train.shape)
@@ -156,9 +143,9 @@ model.fit(X_train, y_train, validation_data=(X_test, y_test),
 
 
 
-# get the loss and metrics
+#loss and metrics
 result = model.evaluate(X_test, y_test)
-# extract those
+
 loss = result[0]
 accuracy = result[1]
 precision = result[2]
@@ -184,6 +171,5 @@ def get_predictions(text):
 
 
 if __name__ == "__main__":
-    # text = "Congratulations! you have won 100,000$ this week, click here to claim fast"
     text = "Buy Health Insurance with Cashless Claim Benefit & Tax saving u/s 80D"
     print(get_predictions(text))
