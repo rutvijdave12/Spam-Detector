@@ -15,3 +15,5 @@ This project consists of:
 
 ***Open predictions folder and run driver.py file***
 
+- Created by Rutvij Dave, Asim Chitre, Shaunak Alshi, Heet Chheda
+
