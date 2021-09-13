@@ -1,5 +1,7 @@
 # Spam-Detector
 
+Created by Rutvij Dave, Asim Chitre, Shaunak Alshi, Heet Chheda
+
 This project consists of:
 
 1.Reading and extraction of email body,sender's name,subject,etc.
@@ -15,5 +17,5 @@ This project consists of:
 
 ***Open predictions folder and run driver.py file***
 
-- Created by Rutvij Dave, Asim Chitre, Shaunak Alshi, Heet Chheda
+
 
